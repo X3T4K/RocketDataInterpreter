@@ -66,7 +66,7 @@ plt.show()
 
 # Funzione per salvataggio
 def save_figure():
-    output_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", "Pressure_vs_Altitude_Velocity.png")
+    output_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", "Pressure_vs_Altitude_Velocity.png")
     fig.savefig(output_path, dpi=300, edgecolor=fig.get_edgecolor())
     print(f"✅ Grafico salvato in: {output_path}")
 

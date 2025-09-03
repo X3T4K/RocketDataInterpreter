@@ -90,7 +90,7 @@ plt.show()
 
 # Salvataggio condizionale via input
 def save_figure():
-    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", "Density_vs_Altitude_Velocity.png")
+    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", "Density_vs_Altitude_Velocity.png")
     fig.savefig(path, dpi=300, edgecolor=fig.get_edgecolor())
     print(f"Grafico salvato in: {path}")
 

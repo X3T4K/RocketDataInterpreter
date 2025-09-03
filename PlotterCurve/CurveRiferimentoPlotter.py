@@ -65,7 +65,7 @@ plt.show()
 
 # Salvataggio opzionale
 def save_figure():
-    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", "CurvaRiferimento.png")
+    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", "CurvaRiferimento.png")
     fig.savefig(path, dpi=300, edgecolor=fig.get_edgecolor())
     print(f"Grafico salvato in: {path}")
 

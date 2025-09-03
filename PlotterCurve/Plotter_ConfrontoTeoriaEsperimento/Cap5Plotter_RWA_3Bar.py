@@ -38,10 +38,10 @@ plt.rcParams.update({
 
 color_alt = '#0C4767'
 color_vel = '#FE9920'
-series_colors = ['#59A14F', '#E15759', '#9C755F']   # verde, rosso, marrone
+series_colors = ['#59A14F', '#4E79A7', '#9C755F']  # verde, blu, marrone tenue
 series_labels = ['Serie 1', 'Serie 2', 'Serie 3']
 
-yerr_alt_val = 0.25
+yerr_alt_val = 1.262
 yerr_vel_val = 3
 xerr_rel = 0.02
 
@@ -167,7 +167,7 @@ for ax in [ax_alt3, ax_vel3]:
 
 # --- Titolo ---
 plt.suptitle(
-    f"3 bar — Simulazione vs Sperimentale\n"
+    f"3 bar — Simulazione vs Sperimentale — Errori: \n"
     f"Alt: medio {err_alt3:.1f}\\%, max {err_alt_max3:.1f}\\% | "
     f"Vel: medio {err_vel3:.1f}\\%, max {err_vel_max3:.1f}\\%",
     fontsize=16
@@ -177,7 +177,7 @@ plt.show()
 
 # Salvataggio
 def save_figure():
-    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", "WaterRatio_3bar_Sperimentale")
+    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", "WaterRatio_3bar_Sperimentale")
     fig.savefig(path, dpi=300, edgecolor=fig.get_edgecolor())
     print(f"Grafico salvato in: {path}")
 

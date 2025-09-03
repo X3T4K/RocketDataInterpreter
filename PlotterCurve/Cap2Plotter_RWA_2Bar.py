@@ -76,7 +76,7 @@ plt.show()
 
 # Salvataggio
 def save_figure():
-    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", "WaterRatio_2bar_LEGIBILE.png")
+    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", "WaterRatio_2bar_LEGIBILE.png")
     fig.savefig(path, dpi=300, edgecolor=fig.get_edgecolor())
     print(f"Grafico salvato in: {path}")
 

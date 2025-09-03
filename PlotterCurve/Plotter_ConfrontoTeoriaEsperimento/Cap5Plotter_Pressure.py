@@ -32,10 +32,10 @@ plt.rcParams.update({
 
 color_alt = '#0C4767'
 color_vel = '#FE9920'
-series_colors = ['#59A14F', '#E15759', '#9C755F']   # verde, rosso, marrone
+series_colors = ['#59A14F', '#4E79A7', '#9C755F']  # verde, blu, marrone tenue
 series_labels = ['Serie 1', 'Serie 2', 'Serie 3']
 
-yerr_alt_val = 0.25       # ±0.25 m
+yerr_alt_val = 1       # ±0.25 m
 yerr_vel_val = 3       # ±3 m/s
 xerr_abs_val = 0.1      # ±0.1 bar
 
@@ -163,13 +163,15 @@ for ax in [ax_altP, ax_velP]:
 
 
 # --- Titolo ---
-plt.suptitle("Altitudine e Velocità in funzione della Pressione — Dati sperimentali", fontsize=16)
+plt.suptitle("Altitudine e Velocità in funzione della Pressione  — Errori: \n"
+    f"Alt: medio 11.09\\%, max 18.08\\% | "
+    f"Vel: medio 10.94\\%, max 27.13\\%", fontsize=16)
 plt.tight_layout()
 plt.show()
 
 # Salvataggio
 def save_figure():
-    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", "Pressure_vs_Altitude_Velocity.png")
+    path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", "Pressure_vs_Altitude.png")
     fig.savefig(path, dpi=300, edgecolor=fig.get_edgecolor())
     print(f"Grafico salvato in: {path}")
 
