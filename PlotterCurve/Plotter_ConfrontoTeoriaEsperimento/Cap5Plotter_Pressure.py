@@ -32,12 +32,12 @@ plt.rcParams.update({
 
 color_alt = '#0C4767'
 color_vel = '#FE9920'
-series_colors = ['#59A14F', '#4E79A7', '#9C755F']  # verde, blu, marrone tenue
-series_labels = ['Serie 1', 'Serie 2', 'Serie 3']
+series_colors = ['#59A14F', '#03a1fc', '#4E79A7' ]  # verde, ciano, blu
+series_labels = ['Serie 1', 'Serie 2', 'Simulazione']
 
-yerr_alt_val = 1       # ±0.25 m
+yerr_alt_val = 1       # ±1 m
 yerr_vel_val = 3       # ±3 m/s
-xerr_abs_val = 0.1      # ±0.1 bar
+xerr_abs_val = 0.2      # ±0.2 bar
 
 # ----------------------
 # Funzione utility
@@ -69,9 +69,11 @@ ax_velP.set_facecolor('white')
 fig.subplots_adjust(right=0.78)
 
 errkw = dict(ecolor='black', elinewidth=1.4, capsize=5, capthick=1.4, zorder=6)
+sim_line = Line2D([], [], color='tab:blue', marker='o',
+                         linestyle='-', label="Simulazione")
 
 # --- Altitudine ---
-ax_altP.plot(pressure_bar, altitude_m, color=color_alt, marker='o', zorder=3, label="Simulazione")
+ax_altP.plot(pressure_bar, altitude_m, color=color_alt, zorder=3, label="Simulazione")
 idx_max = np.argmax(altitude_m)
 ax_altP.scatter(pressure_bar[idx_max], altitude_m[idx_max],
                 color='#77966D', s=80, edgecolor='white', zorder=5)
@@ -111,7 +113,7 @@ ax_altP.legend(handles=handles_alt, loc='center left', bbox_to_anchor=(1.02, 0.5
                frameon=True, framealpha=0.92, title="Altitudine")
 
 # --- Velocità ---
-ax_velP.plot(pressure_bar, velocity_ms, color=color_vel, marker='s', zorder=3, label="Simulazione")
+ax_velP.plot(pressure_bar, velocity_ms, color=color_vel, zorder=3, label="Simulazione")
 idx2_max = np.argmax(velocity_ms)
 ax_velP.scatter(pressure_bar[idx2_max], velocity_ms[idx2_max],
                 color='#CC444B', s=80, edgecolor='white', zorder=5)
@@ -158,8 +160,8 @@ for ax in [ax_altP, ax_velP]:
 
 # Imposta limiti e tick su X
 for ax in [ax_altP, ax_velP]:
-    ax.set_xlim(1.3, 3.7)  # limiti X
-    ax.set_xticks(np.arange(1.5, 3.6, 0.25))  # intervallo tick
+    ax.set_xlim(1.2, 3.7)  # limiti X
+    ax.set_xticks(np.arange(1.5, 4, 0.25))  # intervallo tick
 
 
 # --- Titolo ---

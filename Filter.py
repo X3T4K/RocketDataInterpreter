@@ -119,7 +119,6 @@ def process_rocket_data(
     dt = df['timestamp_sec'].diff().dropna()
     fs = 1.0 / dt.mean()
     print(f"Frequenza di campionamento: {fs:.2f} Hz")
-
     # STEP 1: filtro anti-spike
     finestra=10
     soglia=5

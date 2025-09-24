@@ -36,7 +36,7 @@ ax1.set_facecolor('white')
 ax1.plot(percentuale, altitudine, color=color_alt, marker='o', label="Altitudine [m]")
 idx_max = np.argmax(altitudine)
 ax1.scatter([percentuale[idx_max]], [altitudine[idx_max]], color='#77966D', s=80,
-            edgecolor='white', zorder=5, label=f"Apogeo: {altitudine[idx_max]:.2f} m")
+            edgecolor='white', zorder=5, label=f"Altitudine Max: {altitudine[idx_max]:.2f} m")
 
 # Velocità
 ax2 = ax1.twinx()

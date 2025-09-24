@@ -38,8 +38,8 @@ plt.rcParams.update({
 
 color_alt = '#0C4767'
 color_vel = '#FE9920'
-series_colors = ['#59A14F', '#4E79A7', '#9C755F']  # verde, blu, marrone tenue
-series_labels = ['Serie 1', 'Serie 2', 'Serie 3']
+series_colors = ['#59A14F', '#4E79A7', '#CC444B']  # verde, blu
+series_labels = ['Serie 1', 'Serie 2', 'Massimo curva']
 
 yerr_alt_val = 1.262
 yerr_vel_val = 3
@@ -87,7 +87,17 @@ errkw = dict(ecolor='black', elinewidth=1.4, capsize=5, capthick=1.4, zorder=6)
 ax_alt3.plot(percentuale3, altitudine3, color=color_alt, marker='o', zorder=3, label="Simulazione")
 idx_max = np.argmax(altitudine3)
 ax_alt3.scatter(percentuale3[idx_max], altitudine3[idx_max],
-                color='#77966D', s=80, edgecolor='white', zorder=5)
+                color='#CC444B', s=80, edgecolor='white', zorder=5)
+# --- Altitudine ---
+ax_alt3.axvline(percentuale3[idx_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+ax_alt3.axhline(altitudine3[idx_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+
+# Scrivi valori sull'asse
+ax_alt3.text(percentuale3[idx_max], ax_alt3.get_ylim()[0]-0.5, f"{percentuale3[idx_max]:.1f}%",
+            color='#CC444B', ha='center', va='top', fontsize=11)
+ax_alt3.text(ax_alt3.get_xlim()[0]+3.5, altitudine3[idx_max]+0.5, f"{altitudine3[idx_max]:.2f} m",
+            color='#CC444B', ha='right', va='center', fontsize=11)
+
 
 for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
     xs, ys = make_series(perc_exp3, hmax_exp3, i_rep)
@@ -111,7 +121,7 @@ for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
 
 ax_alt3.set_ylabel("Altitudine [m]", color=color_alt)
 ax_alt3.tick_params(axis='y', labelcolor=color_alt)
-ax_alt3.set_ylim(ymin3, ymax3)
+ax_alt3.set_ylim(ymin3, ymax3+1)
 ax_alt3.grid(which='both', linestyle='--', alpha=0.35)
 ax_alt3.minorticks_on()
 handles_alt = [Line2D([], [], color=color_alt, marker='o', label='Simulazione')] + \
@@ -125,6 +135,16 @@ ax_vel3.plot(percentuale3, velocita3, color=color_vel, marker='s', zorder=3, lab
 idx2_max = np.argmax(velocita3)
 ax_vel3.scatter(percentuale3[idx2_max], velocita3[idx2_max],
                 color='#CC444B', s=80, edgecolor='white', zorder=5)
+
+# --- Velocità ---
+ax_vel3.axvline(percentuale3[idx2_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+ax_vel3.axhline(velocita3[idx2_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+
+# Scrivi valori sull'asse
+
+ax_vel3.text(ax_vel3.get_xlim()[0]+4.5, velocita3[idx2_max]+0.5, f"{velocita3[idx2_max]:.2f} m/s",
+             color='#CC444B', ha='right', va='center', fontsize=11)
+
 
 for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
     xs, ys = make_series(perc_exp3, vplus_exp3, i_rep)
@@ -149,7 +169,7 @@ for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
 ax_vel3.set_xlabel(r"Percentuale di acqua (\%)")
 ax_vel3.set_ylabel("Velocità [m/s]", color=color_vel)
 ax_vel3.tick_params(axis='y', labelcolor=color_vel)
-ax_vel3.set_ylim(ymin3, ymax3)
+ax_vel3.set_ylim(ymin3, ymax3+2)
 ax_vel3.grid(which='both', linestyle='--', alpha=0.35)
 ax_vel3.minorticks_on()
 handles_vel = [Line2D([], [], color=color_vel, marker='s', label='Simulazione')] + \
@@ -160,7 +180,7 @@ ax_vel3.legend(handles=handles_vel, loc='center left', bbox_to_anchor=(1.02, 0.5
 
 # --- Linee guida ---
 for ax in [ax_alt3, ax_vel3]:
-    ax.set_xlim(20, 65)
+    ax.set_xlim(18, 65)
     ax.set_xticks(np.arange(20, 70, 5))
     for xref in [30, 40, 50]:
         ax.axvline(xref, color='gray', linestyle='--', alpha=0.3, zorder=1)

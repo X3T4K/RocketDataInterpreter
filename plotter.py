@@ -30,7 +30,7 @@ def find_log_file(rp_code_value, search_folder):
 # ---------------------------
 RP = input("RP?")
 RP_CODE_VALUE = "RP" + RP
-DATA_FOLDER_PATH = r"C:\Users\fanin\Desktop\Dati accelerometro\LanciRaw\Serie pressioni"
+DATA_FOLDER_PATH = r"C:\Users\fanin\Desktop\Dati WR\LanciRaw\3bar"
 
 selected_file_path = find_log_file(RP_CODE_VALUE, DATA_FOLDER_PATH)
 print(f"File selezionato: {selected_file_path}")
@@ -149,7 +149,7 @@ def preview_untrimmed_data(df_bmp_local):
     fig.update_yaxes(title_text="Altitudine (m)", row=1, col=1)
     fig.update_yaxes(title_text="Velocità (m/s)", row=2, col=1)
 
-    file_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Temp", "preview_untrimmed.html")
+    file_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Temp", "preview_untrimmed.html")
     fig.write_html(file_path)
     webbrowser.open('file://' + os.path.realpath(file_path))
 
@@ -288,7 +288,7 @@ def save_altitude_velocity_plot(df_bmp, altitude_max_val, vmax_val, t_vmax_val, 
     ax2.legend()
 
     # Migliora layout
-    output_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Plots", f"{pressure}Bar_{ratio}pct.png")
+    output_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Plots", f"{pressure}Bar_{ratio}pct.png")
 
     plt.tight_layout()
     plt.subplots_adjust(top=0.92)
@@ -300,7 +300,7 @@ def save_altitude_velocity_plot(df_bmp, altitude_max_val, vmax_val, t_vmax_val, 
     # ---------------------------
     # Salvataggio metriche su file (con controllo campo Extra)
     # ---------------------------
-    metrics_txt_path = r"C:\Users\fanin\Desktop\Dati accelerometro\metrics.txt"
+    metrics_txt_path = r"C:\Users\fanin\Desktop\Dati WR\metrics.txt"
     try:
         last_extra_filled = False
         if os.path.exists(metrics_txt_path):
@@ -424,7 +424,7 @@ plot_figure = finalize_plot(plot_figure)
 # SALVATAGGIO E APERTURA PLOT
 # ---------------------------
 file_name = f"RP{RP_id}.html"
-output_html_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati accelerometro\\Temp", file_name)
+output_html_path = os.path.join("C:\\Users\\fanin\\Desktop\\Dati WR\\Temp", file_name)
 # Apri il browser solo se il file non esisteva già
 if not os.path.exists(output_html_path):
     plot_figure.write_html(output_html_path)
@@ -434,9 +434,9 @@ if input("Vuoi eseguire il salvataggio? (s/n): ").strip().lower() == "s":
     #saver = file_saver(RP_id, folder_path, df_imu, df_bmp, 0, 0, 0)
     #saver.save_data()
 
-    pressure = float(input("Pressure (intero): "))
+    pressure = float(input("Pressure: "))
     ratio = float(input("Ratio: "))
     save_altitude_velocity_plot(df_bmp, altitude_max_val, vmax_val, t_vmax_val, vmin_val, t_vmin_val, pressure, ratio)
-    os.startfile(r"C:\Users\fanin\Desktop\Dati accelerometro\Plots")
+    os.startfile(r"C:\Users\fanin\Desktop\Dati WR\Plots")
 
 

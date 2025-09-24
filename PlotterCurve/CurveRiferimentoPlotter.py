@@ -32,7 +32,7 @@ color_max_alt = '#77966D'
 color_max_vel = '#CC444B'
 
 # Figure con due sottografici
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), linewidth=4, edgecolor=color_alt)
 
 # --- ALTITUDINE ---
 ax1.plot(t, alt, color=color_alt, label="Altitudine [m]")

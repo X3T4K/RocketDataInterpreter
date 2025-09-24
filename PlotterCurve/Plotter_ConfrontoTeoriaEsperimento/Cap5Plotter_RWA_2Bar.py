@@ -81,8 +81,8 @@ def make_series(x_raw, y_raw, i_rep):
     return np.array(xs, dtype=float), np.array(ys, dtype=float)
 
 # Palette serie (coerente con blu scuro e arancio del grafico)
-series_colors = ['#59A14F', '#4E79A7', '#9C755F']  # verde, blu, marrone tenue
-series_labels = ['Serie 1', 'Serie 2', 'Serie 3']
+series_colors = ['#59A14F', '#4E79A7', '#9C755F', '#CC444B']  # verde, blu, marrone tenue
+series_labels = ['Serie 1', 'Serie 2', 'Serie 3', 'Massimo curva']
 
 # Errori percentuali medi
 err_alt = np.mean(np.abs((hmax_exp - np.interp(perc_exp, percentuale, altitudine)) / hmax_exp)) * 100
@@ -106,7 +106,17 @@ errkw = dict(ecolor='black', elinewidth=1.4, capsize=5, capthick=1.4, zorder=6)
 ax_alt.plot(percentuale, altitudine, color=color_alt, marker='o', zorder=3, label="Simulazione")
 idx_max = np.argmax(altitudine)
 ax_alt.scatter(percentuale[idx_max], altitudine[idx_max],
-               color='#77966D', s=80, edgecolor='white', zorder=5, label='_nolegend_')
+               color='#CC444B', s=80, edgecolor='white', zorder=5, label='_nolegend_')
+
+# --- Altitudine ---
+ax_alt.axvline(percentuale[idx_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+ax_alt.axhline(altitudine[idx_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+
+# Scrivi valori sull'asse
+(ax_alt.text(percentuale[idx_max], ax_alt.get_ylim()[0]-0.5, f"{percentuale[idx_max]:.1f}%",
+            color='#CC444B', ha='center', va='top', fontsize=11))
+ax_alt.text(ax_alt.get_xlim()[0]+3.5, altitudine[idx_max]+0.5, f"{altitudine[idx_max]:.2f} m",
+            color='#CC444B', ha='right', va='center', fontsize=11)
 
 for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
     xs, ys = make_series(perc_exp, hmax_exp, i_rep)
@@ -140,7 +150,7 @@ handles_alt = [Line2D([], [], color=color_alt, marker='o', label='Simulazione')]
 for c, lab in zip(series_colors, series_labels):
     handles_alt.append(Line2D([], [], marker='o', color='none', markerfacecolor=c,
                               markeredgecolor='black', label=lab))
-ax_alt.legend(handles=handles_alt, loc='lower center',
+ax_alt.legend(handles=handles_alt, loc='best',
               frameon=True, framealpha=0.92, title="Altitudine")
 
 # ================= VELOCITÀ =================
@@ -148,6 +158,14 @@ ax_vel.plot(percentuale, velocita, color=color_vel, marker='s', zorder=3, label=
 idx2_max = np.argmax(velocita)
 ax_vel.scatter(percentuale[idx2_max], velocita[idx2_max],
                color='#CC444B', s=80, edgecolor='white', zorder=5, label='_nolegend_')
+# --- Velocità ---
+ax_vel.axvline(percentuale[idx2_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+ax_vel.axhline(velocita[idx2_max], color='#CC444B', linestyle='dotted', alpha=0.6, zorder=2)
+
+# Scrivi valori sull'asse
+
+ax_vel.text(ax_vel.get_xlim()[0]+4.5, velocita[idx2_max]+0.5, f"{velocita[idx2_max]:.2f} m/s",
+             color='#CC444B', ha='right', va='center', fontsize=11)
 
 for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
     xs, ys = make_series(perc_exp, vplus_exp, i_rep)
@@ -173,7 +191,7 @@ for i_rep, (c, lab) in enumerate(zip(series_colors, series_labels)):
 ax_vel.set_xlabel(r"Percentuale di acqua (\%)")
 ax_vel.set_ylabel("Velocità [m/s]", color=color_vel)
 ax_vel.tick_params(axis='y', labelcolor=color_vel)
-ax_vel.set_ylim(ymin, ymax)
+ax_vel.set_ylim(ymin+2, ymax+3)
 ax_vel.grid(which='both', linestyle='--', alpha=0.35)
 ax_vel.minorticks_on()
 
@@ -182,12 +200,12 @@ handles_vel = [Line2D([], [], color=color_vel, marker='s', label='Simulazione')]
 for c, lab in zip(series_colors, series_labels):
     handles_vel.append(Line2D([], [], marker='o', color='none', markerfacecolor=c,
                               markeredgecolor='black', label=lab))
-ax_vel.legend(handles=handles_vel, loc='lower center',
+ax_vel.legend(handles=handles_vel, loc='best',
               frameon=True, framealpha=0.92, title="Velocità")
 
 # Linee guida verticali + X condivisa
 for ax in [ax_alt, ax_vel]:
-    ax.set_xlim(10, 65)
+    ax.set_xlim(13, 70)
     ax.set_xticks(np.arange(10, 70, 5))
     for xref in [30, 40, 50]:
         ax.axvline(xref, color='gray', linestyle='--', alpha=0.3, zorder=1)
